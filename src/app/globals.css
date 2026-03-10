@@ -1,26 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@utility container {
+  margin-inline: auto;
+  width: 100%;
+  padding-inline: 2rem;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  @media (width >= 600px) {
+    max-width: 600px;
+  }
+  @media (width >= 728px) {
+    max-width: 728px;
+  }
+  @media (width >= 1025px) {
+    max-width: 1025px;
+  }
+  @media (width >= 1240px) {
+    max-width: 1240px;
+  }
+  @media (width >= 1441px) {
+    max-width: 1441px;
   }
 }
 
+@theme {
+  --font-montserrat: "Montserrat", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-montserrat);
+  overflow-x: hidden;
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    #ff3bff 0%,
+    #ecbfbf 38.02%,
+    #5c24ff 75.83%,
+    #d94fd5 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-gradient {
+  position: relative;
+  background: #000;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 9999px;
+  font-family: var(--font-montserrat);
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  width: 176px;
+  height: 70px;
+  transition: opacity 0.2s;
+}
+.btn-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 2px;
+  background: linear-gradient(
+    90deg,
+    #ff3bff 0%,
+    #ecbfbf 38.02%,
+    #5c24ff 75.83%,
+    #d94fd5 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.btn-gradient:hover {
+  opacity: 0.85;
+}
+
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+.orb {
+  border-radius: 50%;
+  position: absolute;
+  pointer-events: none;
+  animation: floatY 6s ease-in-out infinite;
+}
+
+@media screen and (max-width: 768px) {
+  .btn-gradient {
+    width: 150px;
+    height: 70px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .btn-gradient {
+    width: 100px;
+    height: 50px;
+    font-size: 14px;
+  }
 }
